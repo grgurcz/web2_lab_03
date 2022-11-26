@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vrlo jednostavna HTML5 igra</title>
+
+        <style>
+            canvas {
+                border:1px solid #000000;
+                background-color: #f1f1f1;
+            }
+        </style>
+
+        <script src="./igra.js"></script>
+        <script>
+        var myGamePieces = [];
+        var numPieces = Math.max(Math.floor(Math.random() * 10), 3)
+        var numPiecesHit = 0;
+        var text = new generated_and_hit(numPieces, numPiecesHit)
+        
+        function startGame() {
+            for(i = 0; i < numPieces; i ++) {
+                var myGamePiece = new component();
+                myGamePieces.push(myGamePiece);
+            }
+            myGameArea.canvas.addEventListener('click', (e) => {
+                const mousePoint = {x: e.clientX, y: e.clientY}
+                myGamePieces.forEach(piece => {
+                    if(piece.checkHit(mousePoint)) {
+                        piece.hit = true;
+                        numPiecesHit += 1
+                    }
+                })
+            })
+            myGameArea.start();
+        }
+        function updateGameArea() {
+            myGameArea.clear();
+            myGamePieces.forEach(piece => {
+                piece.newPos();
+                piece.update();
+            })
+            text.update(numPiecesHit)
+        }
+        </script>
+    </head>
+    <body onload="startGame()">
+        <h1>Vrlo jednostavna HTML5 igra</h1>
+    </body>
+</html>
