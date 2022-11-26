@@ -14,7 +14,7 @@ var myGameArea = {
     },
     stop : function() {
         clearInterval(this.interval);
-    }, 
+    },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -36,8 +36,8 @@ function generated_and_hit(generated, hit) {
 function component() {
     this.width = 80;
     this.height = 80;
-    this.speed_x = Math.floor(Math.random() * 3);
-    this.speed_y = Math.floor(Math.random() * 3);
+    this.speed_x = Math.floor(Math.random() * 5);
+    this.speed_y = Math.floor(Math.random() * 5);
     this.x = 200 + Math.floor(Math.random() * 300);
     this.y = 200 + Math.floor(Math.random() * 300);
     this.hit = false
@@ -45,7 +45,7 @@ function component() {
         if(!this.hit){
             ctx = myGameArea.context
             ctx.save();
-            ctx.translate(this.x, this.y); 
+            ctx.translate(this.x, this.y);
             ctx.fillStyle = 'red';
             ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);
             ctx.restore();
@@ -54,11 +54,11 @@ function component() {
     this.newPos = function() {
         if (this.x - this.width / 2 < 0)
             this.changeSpeed(true, false);
-        else if ((this.x + this.width / 2) >= myGameArea.context.canvas.width) 
+        else if ((this.x + this.width / 2) >= myGameArea.context.canvas.width)
             this.changeSpeed(true, false)
         if (this.y - this.height / 2 < 0)
             this.changeSpeed(false, true)
-        else if ((this.y + this.height / 2) >= myGameArea.context.canvas.height) 
+        else if ((this.y + this.height / 2) >= myGameArea.context.canvas.height)
             this.speed_y = 2;
             this.x += this.speed_x;
             this.y -= this.speed_y;
